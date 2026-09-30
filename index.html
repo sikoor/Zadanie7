@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>JS - Zdarzenia</title>
+
+    <style>
+        #kontener {
+            width: 50px;
+            height: 50px;
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        .wyroznione {
+            cursor: pointer;
+        }
+
+        #artykul {
+            width: 100px;
+        }
+
+        #liczba {
+            border: 1px solid black;
+            min-height: 20px;
+            margin-top: 10px;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            // ===== KONTENER =====
+            const kontener = document.querySelector("#kontener");
+
+            // Kliknięcie - losowy kolor tła
+            kontener.addEventListener("click", function () {
+                const r = Math.floor(Math.random() * 256);
+                const g = Math.floor(Math.random() * 256);
+                const b = Math.floor(Math.random() * 256);
+
+                kontener.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            });
+
+            // Najechanie - czcionka 2 razy większa
+            kontener.addEventListener("mouseenter", function () {
+                kontener.style.fontSize = "2em";
+            });
+
+            // Opuszczenie - powrót do pierwotnego rozmiaru
+            kontener.addEventListener("mouseleave", function () {
+                kontener.style.fontSize = "1em";
+            });
+
+
+            // ===== PARAGRAF =====
+            const wyroznione = document.querySelector(".wyroznione");
+
+            // Podwójne kliknięcie - zmiana miejscowości na powiat
+            wyroznione.addEventListener("dblclick", function () {
+                wyroznione.textContent = "powiat radomski";
+            });
+
+            // Najechanie - komunikat w konsoli
+            wyroznione.addEventListener("mouseenter", function () {
+                console.log(wyroznione.textContent);
+            });
+
+
+            // ===== POLE TEKSTOWE =====
+            const artykul = document.querySelector("#artykul");
+            const liczba = document.querySelector("#liczba");
+
+            // Każdy klawisz zwiększa szerokość pola o 1px
+            artykul.addEventListener("keydown", function (event) {
+                artykul.style.width = (artykul.offsetWidth + 1) + "px";
+
+                // Jeżeli wciśnięto cyfrę, dopisz ją do diva
+                if (event.key >= "0" && event.key <= "9") {
+                    liczba.textContent += event.key;
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <div id="kontener">Jan Kowalski</div>
+
+    <p class="wyroznione">Radom</p>
+
+    <input type="text" id="artykul">
+
+    <div id="liczba"></div>
+
+</body>
+</html>
